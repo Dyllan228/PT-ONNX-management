@@ -46,14 +46,16 @@ import TaskProgress from '../components/TaskProgress.vue'
 
 const store = useModelStore()
 const ptModels = computed(() => store.models.filter(m => !m.onnx_converted))
-const form = ref({ model_id: null, inputSizeStr: '640,640', opset_version: 11, dynamic_batch: true })
+const form = ref({
+  model_id: null,
+  inputSizeStr: '640,640',
+  opset_version: 11,
+  dynamic_batch: true,
+})
 const converting = ref(false)
 const currentTask = ref(null)
 
-onMounted(() => {
-  store.fetchModels()
-  if (store.models.length) form.value.model_id = store.models[0].id
-})
+onMounted(() => store.fetchModels())
 
 async function handleConvert() {
   if (!form.value.model_id) {
@@ -72,6 +74,7 @@ async function handleConvert() {
     const taskId = res.data.task_id
     currentTask.value = { status: 'running', progress: 0 }
 
+    // 轮询任务状态
     const timer = setInterval(async () => {
       const statusRes = await getConvertTask(taskId)
       currentTask.value = statusRes.data
@@ -88,7 +91,7 @@ async function handleConvert() {
     }, 1500)
   } catch (e) {
     converting.value = false
-    ElMessage.error('创建转换任务失败')
+    ElMessage.error('创建任务失败')
   }
 }
 </script>
