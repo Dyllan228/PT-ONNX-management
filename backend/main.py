@@ -2,6 +2,8 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from db.database import init_db
 from api.models import router as models_router
+from api.convert import router as convert_router
+from api.tasks import router as tasks_router
 
 app = FastAPI(title="PT-ONNX Benchmark Tool", version="2.0.0")
 
@@ -14,6 +16,8 @@ app.add_middleware(
 )
 
 app.include_router(models_router)
+app.include_router(convert_router)
+app.include_router(tasks_router)
 
 
 @app.on_event("startup")
