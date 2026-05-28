@@ -5,6 +5,8 @@ from api.models import router as models_router
 from api.convert import router as convert_router
 from api.tasks import router as tasks_router
 from api.inference import router as inference_router
+from api.benchmark import router as benchmark_router
+from api.datasets import router as datasets_router
 
 app = FastAPI(title="PT-ONNX Benchmark Tool", version="2.0.0")
 
@@ -20,6 +22,8 @@ app.include_router(models_router)
 app.include_router(convert_router)
 app.include_router(tasks_router)
 app.include_router(inference_router)
+app.include_router(benchmark_router)
+app.include_router(datasets_router)
 
 
 @app.on_event("startup")
