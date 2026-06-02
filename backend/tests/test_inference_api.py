@@ -12,8 +12,8 @@ def test_create_inference_task_no_file(client):
     model_id = upload_resp.json()["id"]
 
     response = client.post("/api/inference", data={
-        "model_id": model_id,
-        "model_type": "pt",
+        "mid": model_id,
+        "mtype": "pt",
         "device": "cpu",
     })
     assert response.status_code == 400
@@ -22,8 +22,8 @@ def test_create_inference_task_no_file(client):
 def test_create_inference_task_nonexistent_model(client):
     """Inference with nonexistent model should return 404."""
     response = client.post("/api/inference", data={
-        "model_id": 9999,
-        "model_type": "pt",
+        "mid": 9999,
+        "mtype": "pt",
         "device": "cpu",
     })
     assert response.status_code == 404
@@ -41,7 +41,7 @@ def test_create_inference_task_unsupported_file(client):
 
     response = client.post(
         "/api/inference",
-        data={"model_id": model_id, "model_type": "pt", "device": "cpu"},
+        data={"mid": model_id, "mtype": "pt", "device": "cpu"},
         files={"file": ("test.txt", io.BytesIO(b"hello"), "text/plain")},
     )
     assert response.status_code == 400

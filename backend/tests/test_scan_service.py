@@ -1,4 +1,5 @@
-from unittest.mock import patch, MagicMock
+import uuid
+from unittest.mock import patch
 from db.database import SessionLocal
 from services.scan_service import scan_and_register
 from db.models import Model as ModelDB
@@ -6,7 +7,8 @@ from db.models import Model as ModelDB
 
 def test_scan_registers_root_pt_files(tmp_path):
     """scan_and_register should find .pt files in the root directory."""
-    fake_pt = tmp_path / "scan-test-model.pt"
+    unique_name = f"scan-test-{uuid.uuid4().hex[:8]}"
+    fake_pt = tmp_path / f"{unique_name}.pt"
     fake_pt.write_bytes(b"fake_pt_content")
 
     storage_pt = tmp_path / "storage" / "models" / "pt"
@@ -20,14 +22,15 @@ def test_scan_registers_root_pt_files(tmp_path):
             count = scan_and_register(db)
             assert count >= 1
             models = db.query(ModelDB).all()
-            assert any(m.name == "scan-test-model" for m in models)
+            assert any(m.name == unique_name for m in models)
         finally:
             db.close()
 
 
 def test_scan_skips_duplicates(tmp_path):
     """Running scan twice should not create duplicates."""
-    fake_pt = tmp_path / "dup-model.pt"
+    unique_name = f"dup-model-{uuid.uuid4().hex[:8]}"
+    fake_pt = tmp_path / f"{unique_name}.pt"
     fake_pt.write_bytes(b"fake_pt_content")
 
     storage_pt = tmp_path / "storage" / "models" / "pt"

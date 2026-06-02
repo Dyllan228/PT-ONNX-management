@@ -1,8 +1,10 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from typing import Optional
 
 
 class InferenceRequest(BaseModel):
+    model_config = ConfigDict(protected_namespaces=())
+
     model_id: int
     model_type: str
     device: str

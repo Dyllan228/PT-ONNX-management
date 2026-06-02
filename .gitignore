@@ -12,6 +12,9 @@ venv/
 # Storage (generated at runtime)
 storage/
 
+# Offline packages (large files)
+offline_packages/
+
 # IDE
 .vscode/
 .idea/
@@ -23,3 +26,7 @@ frontend/dist/
 # OS
 .DS_Store
 Thumbs.db
+
+# Build artifacts
+*.zip
+*.whl

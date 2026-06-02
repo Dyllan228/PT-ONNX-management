@@ -1,13 +1,36 @@
+# PT-ONNX Benchmark Tool - Full Dependencies (Development)
+# Install: pip install -r requirements.txt
+
+# === Web Framework ===
 fastapi==0.115.0
 uvicorn==0.30.0
 sqlalchemy==2.0.35
 pydantic==2.9.0
-torch==2.4.0
-onnxruntime==1.19.0
-onnx==1.17.0
-opencv-python==4.10.0.84
-numpy==1.24.4
 python-multipart==0.0.9
+
+# === Inference Engine ===
+# PyTorch - Install separately based on your hardware:
+#   CPU only:  pip install torch --index-url https://download.pytorch.org/whl/cpu
+#   CUDA 11.8: pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+#   CUDA 12.1: pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+torch>=2.0.0
+
+# ONNX Runtime
+onnxruntime==1.19.0
+# For GPU: pip install onnxruntime-gpu==1.19.0
+
+onnx==1.17.0
+
+# === Image/Video Processing ===
+opencv-python-headless==4.10.0.84
+numpy==1.24.4
+
+# === System ===
 psutil==6.0.0
+
+# === Testing (optional) ===
 pytest==8.3.0
 httpx==0.27.0
+
+# === Optional: YOLO metadata extraction ===
+# ultralytics>=8.0.0
