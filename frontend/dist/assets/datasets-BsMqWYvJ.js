@@ -1,0 +1,1 @@
+import{t as e}from"./request-GLc_hVR-.js";var t=()=>e.get(`/datasets/sources`),n=()=>e.get(`/datasets`),r=t=>e.post(`/datasets/import`,t,{headers:{"Content-Type":`multipart/form-data`}}),i=(t,n)=>e.put(`/datasets/${t}`,n),a=t=>e.delete(`/datasets/${t}`),o=t=>e.get(`/datasets/${t}/splits`),s=e=>`/api/datasets/${e}/download`;export{n as a,o as i,t as n,r as o,s as r,i as s,a as t};

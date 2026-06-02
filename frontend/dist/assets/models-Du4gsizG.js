@@ -1,0 +1,1 @@
+import{t as e}from"./request-GLc_hVR-.js";var t=()=>e.get(`/models`),n=t=>e.post(`/models/upload`,t,{headers:{"Content-Type":`multipart/form-data`}}),r=(t,n)=>e.put(`/models/${t}`,n),i=t=>e.delete(`/models/${t}`),a=()=>e.post(`/models/scan`),o=(e,t)=>`/api/models/${e}/download/${t}`;export{r as a,a as i,o as n,n as o,t as r,i as t};

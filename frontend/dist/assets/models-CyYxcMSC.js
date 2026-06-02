@@ -1,0 +1,1 @@
+import{C as e,r as t}from"./index-CFoZXdpn.js";import{t as n}from"./request-GLc_hVR-.js";var r=t(`models`,()=>{let t=e([]),r=e(!1);async function i(){r.value=!0;try{t.value=(await n.get(`/models`)).data}finally{r.value=!1}}return{models:t,loading:r,fetchModels:i}});export{r as t};
